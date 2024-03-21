@@ -5,8 +5,20 @@ A set of Netlify ready widgets, just to be configured via the appropriate env va
 
 [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/cedmax/astro-widgets)
 
+## Scheduling
 
-## Last.fm
+There's a scheduled function executing every Monday at midnight.
+If you add a [Netlify build hook](https://docs.netlify.com/configure-builds/build-hooks/) in the env, the widgets will be updated.
+If you need a different scheduling you can either use something like [EasyCron](https://www.easycron.com/) or fork the repo.
+
+| Environment Variable  | Description | 
+| --------------------- | ----------- | 
+| BUILD_HOOK            | Netlify Build Hook URL | 
+
+
+## Services
+
+### Last.fm
 
 A widget to show the most listened to track, album or artist in a period of time for a given user.
 
@@ -14,7 +26,7 @@ Built on `/lastfm`.
 
 <img src="/lastfm-example.png" alt="last.fm widget example" width="384" />
 
-### Configuration
+#### Configuration
 
 | Environment Variable  | Default         | Description |
 | --------------------- | --------------- | ----------- |
@@ -24,11 +36,11 @@ Built on `/lastfm`.
 | LASTFM_TIMEFRAME      | `7day`          | Options available: `overall`, `7day`, `1month`, `3month`, `6month`, `12month` |
 | PUBLIC_LASTFM_BGCOLOR | `#a8302c`       | Any color in any css digestible format, the font color will change according to contrast needs |
 
-## Strava
+### Strava
 
 A widget to show the distance ran/swam/cycled in a given period of time for the user.
 
-*N.B.* 
+**N.B.**
 This implementation won't rely on a full OAuth but on an hardcoded refresh token. 
 This, as per the OAuth design, means the build could fail at any time if the refresh_token changes.
 
@@ -36,7 +48,7 @@ Built on `/strava`.
 
 <img src="/strava-example.png" alt="last.fm widget example" width="320" />
 
-### Configuration
+#### Configuration
 
 | Environment Variable  | Default               | Description |
 | --------------------- | --------------------- | ----------- |

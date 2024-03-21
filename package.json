@@ -6,6 +6,7 @@
     "dev": "astro dev",
     "start": "astro dev",
     "build": "NODE_ENV=production astro build",
+    "postinstall": "cd functions/scheduler && yarn",
     "preview": "astro preview",
     "astro": "astro"
   },
