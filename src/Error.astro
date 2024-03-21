@@ -1,0 +1,11 @@
+---
+const { error } = Astro.props
+---
+
+{
+  error && (
+    <div class="flex px-4 leading-5 justify-center items-center widget gap-2 h-20 w-96 overflow-hidden relative select-none bg-red-900 text-white">
+      <div>Error: {error}</div>
+    </div>
+  )
+}
