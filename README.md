@@ -1,6 +1,10 @@
 # Astro Widgets
 
-All the widget can be configured via adding the appropriate env variables when building.
+A set of Netlify ready widgets, just to be configured via the appropriate env variables when building.
+
+
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/cedmax/astro-widgets)
+
 
 ## Last.fm
 
