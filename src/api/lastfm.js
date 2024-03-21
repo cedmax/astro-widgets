@@ -5,16 +5,16 @@ import { find, get } from "lodash-es"
 const env = import.meta.env
 
 const periods = ["overall", "7day", "1month", "3month", "6month", "12month"]
-const periodStrings = [
-  "overall",
-  "7 days",
-  "month",
-  "3 months",
-  "6 months",
-  "12 months",
-]
+const periodStrings = {
+  overall: "overall",
+  "7day": "7 days",
+  "1month": "month",
+  "3month": "3 months",
+  "6month": "6 months",
+  "12month": "12 months",
+}
 const getCopyString = (entity, period) =>
-  `Top ${entity} in the last ${periodStrings[periods.findIndex((t) => t === period)]}`
+  `Top ${entity}${period === "overall" ? "" : ` in the last ${periodStrings[period]}`}`
 
 const methods = ["track", "artist", "album"]
 const methodsMap = {
