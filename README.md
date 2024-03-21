@@ -27,7 +27,6 @@ A widget to show the most listened to track, album or artist in a period of time
   src="{YOUR_NETLIFY_DOMAIN}/lastfm" 
   style="width:384px;border:0;height:80px;outline:0" 
   frameborder="0"
-  allowtransparency="true"
   scrolling="no"
 />
 ```
@@ -57,7 +56,6 @@ This, as per the OAuth design, means the build could fail at any time if the ref
   src="{YOUR_NETLIFY_DOMAIN}/strava" 
   style="width:320px;border:0;height:80px;outline:0" 
   frameborder="0"
-  allowtransparency="true"
   scrolling="no"
 />
 ```
