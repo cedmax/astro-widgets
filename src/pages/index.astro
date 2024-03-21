@@ -1,0 +1,25 @@
+---
+import { compiledContent } from "../../README.md"
+
+const content = compiledContent().replace(/\/public\//g, "/")
+---
+
+<html>
+  <meta charset="utf-8" />
+  <title>Astro Widgets</title>
+  <body class="bg-slate-100">
+    <div
+      class:list={[
+        "py-20",
+        "max-w-prose",
+        "m-auto",
+        "prose",
+        "prose-a",
+        "prose-img:my-10",
+        "prose-img:m-auto",
+        "hover:prose-a:text-red-900",
+      ]}
+      set:html={content}
+    />
+  </body>
+</html>
