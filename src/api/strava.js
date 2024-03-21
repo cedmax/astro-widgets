@@ -71,6 +71,7 @@ export default class Strava {
       data[`${this.period}_${this.activity}_totals`]
 
     return {
+      id,
       username,
       firstname,
       image: profile,
@@ -93,8 +94,10 @@ export default class Strava {
 
   async fetch() {
     const data = await this.#getAthleteStats()
+
     return {
       image: data.image,
+      url: `https://www.strava.com/athletes/${data.id}`,
       title: formatDistance[this.unit](data.distance),
       copy: getCopyString(this.activity, this.period),
     }
