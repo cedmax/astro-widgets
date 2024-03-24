@@ -13,7 +13,7 @@ If you need a different scheduling you can either use something like [EasyCron](
 
 | Environment Variable  | Description | 
 | --------------------- | ----------- | 
-| `BUILD_HOOK`            | Netlify Build Hook URL | 
+| `BUILD_HOOK`          | Netlify Build Hook URL | 
 
 
 ## Services
@@ -31,7 +31,7 @@ A widget to show the most listened to track, album or artist in a period of time
 />
 ```
 
-<img src="/public/lastfm-example.png" alt="last.fm widget example" width="384" />
+[<img src="/public/lastfm-example.png" alt="last.fm widget example" width="384" />](https://astro-widgets.netlify.app/lastfm/)
 
 #### Configuration
 
@@ -50,6 +50,7 @@ A widget to show the distance ran/swam/cycled in a given period of time for the 
 **N.B.**
 This implementation won't rely on a full OAuth but on an hardcoded refresh token. 
 This, as per the OAuth design, means the build could fail at any time if the refresh_token changes.
+You should receive an email from Netlify, change the ENV variable and it re-build.
 
 ```
 <iframe 
@@ -60,7 +61,7 @@ This, as per the OAuth design, means the build could fail at any time if the ref
 />
 ```
 
-<img src="/public/strava-example.png" alt="last.fm widget example" width="320" />
+[<img src="/public/strava-example.png" alt="last.fm widget example" width="320" />](https://astro-widgets.netlify.app/strava/)
 
 #### Configuration
 
