@@ -11,13 +11,22 @@ try {
   error = e.message
 }
 
-const bgColor = import.meta.env.PUBLIC_LITERALFM_BGCOLOR || "#e8e3d5"
+const sizes = {
+  small: 72,
+  medium: 96,
+  large: 120,
+}
+
+const bgColor = import.meta.env.PUBLIC_LITERALCLUB_BGCOLOR || "#e8e3d5"
+const size = import.meta.env.PUBLIC_LITERALCLUB_SIZE
+
+const coverSize = `${sizes[size] || sizes.small}px`
 const color = fontColorContrast.default(bgColor)
 ---
 
 {
   !error && (
-    <main class="relative flex items-center py-3 h-32">
+    <main class="relative flex items-center py-3">
       <a
         class="w-full"
         href={`https://literal.club/book/${data.slug}`}
@@ -25,11 +34,11 @@ const color = fontColorContrast.default(bgColor)
         rel="noopener noreferrer"
       >
         <div class="block opacity-90 z-10 text-sm">
-          <span class="text-xs pl-24 italic mb-2">Currently reading:</span>
-          <div class="line-clamp-2 p-1 pb-0 pl-24 title w-full font-bold text-lg">
+          <span class="padded text-xs italic mb-2">Currently reading:</span>
+          <div class="padded line-clamp-2 p-1 pb-0 title w-full font-bold text-lg">
             {data.title}
           </div>
-          <div class="font-normal pl-24 p-2 pt-0 title line-clamp-1 w-full uppercase text-xs">
+          <div class="padded font-normal p-2 pt-0 title line-clamp-1 w-full uppercase text-xs">
             <span class="italic text-xs lowercase">by </span>
             {data.authors.map(({ name }) => name).join(", ")}
           </div>
@@ -54,22 +63,26 @@ const color = fontColorContrast.default(bgColor)
 }
 <Error error={error} />
 
-<style lang="scss" define:vars={{ bgColor, color }}>
-  .book {
-    $book-width: 72px;
-    $bit: $book-width / 160;
+<style lang="scss" define:vars={{ bgColor, color, coverSize }}>
+  main {
+    height: calc((var(--coverSize) * 1.5) + 20px);
+  }
 
+  .padded {
+    padding-left: calc(var(--coverSize) + 25px);
+  }
+
+  .book {
     box-shadow:
-      #{$bit / 2} #{$bit / 2} #{$bit * 2} rgba(black, 0.3),
-      $bit $bit #{$bit * 4} rgba(black, 0.3),
-      #{$bit * 4} #{$bit * 5} #{$bit * 10} rgba(black, 0.4);
+      0 0 5px -1px black,
+      inset -1px 1px 2px rgba(255, 255, 255, 0.5);
 
     &,
     &::after {
       display: block;
-      width: $book-width;
-      height: #{$book-width * 1.45};
-      border-radius: #{$bit * 2};
+      width: var(--coverSize);
+      height: calc(var(--coverSize) * 1.5);
+      border-radius: calc(var(--coverSize) / 160 * 2);
     }
 
     &::after {
@@ -77,9 +90,6 @@ const color = fontColorContrast.default(bgColor)
       position: absolute;
       top: 0;
       left: 0;
-      box-shadow:
-        -#{$bit / 2} -#{$bit} #{$bit * 2} rgba(black, 0.2) inset,
-        -#{$bit / 2} -#{$bit / 2} $bit rgba(black, 0.2) inset;
       background-image: linear-gradient(
           to bottom,
           rgba(white, 0.1),
@@ -88,9 +98,9 @@ const color = fontColorContrast.default(bgColor)
         linear-gradient(
           to right,
           rgba(black, 0.2) 0,
-          rgba(black, 0) #{$bit * 2},
-          rgba(black, 0.2) #{$bit * 4},
-          rgba(black, 0) #{$bit * 5}
+          rgba(black, 0) calc(var(--coverSize) / 160 * 2),
+          rgba(black, 0.2) calc(var(--coverSize) / 160 * 4),
+          rgba(black, 0) calc(var(--coverSize) / 160 * 5)
         );
     }
   }
