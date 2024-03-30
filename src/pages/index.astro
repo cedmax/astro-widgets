@@ -4,7 +4,7 @@ import { compiledContent } from "../../README.md"
 const content = compiledContent().replace(/\/public\//g, "/")
 ---
 
-<html>
+<html class="scroll-smooth focus:scroll-auto">
   <head>
     <meta charset="utf-8" />
     <title>Astro Widgets</title>
@@ -21,6 +21,7 @@ const content = compiledContent().replace(/\/public\//g, "/")
         "prose-a",
         "prose-img:my-10",
         "prose-img:m-auto",
+        "prose-ul:leading-none",
         "hover:prose-a:text-red-900",
       ]}
       set:html={content}
@@ -36,5 +37,13 @@ const content = compiledContent().replace(/\/public\//g, "/")
           fill="#151513"></path></svg
       ></a
     >
+    <footer
+      class:list={["text-xs", "m-auto", "max-w-prose", "text-center", "pb-20"]}
+    >
+      made with ❤️ by <a
+        class="underline hover:text-red-900"
+        href="https://cedmax.com">cedmax</a
+      >
+    </footer>
   </body>
 </html>
