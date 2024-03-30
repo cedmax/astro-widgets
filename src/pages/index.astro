@@ -5,12 +5,16 @@ const content = compiledContent().replace(/\/public\//g, "/")
 ---
 
 <html>
-  <meta charset="utf-8" />
-  <title>Astro Widgets</title>
+  <head>
+    <meta charset="utf-8" />
+    <title>Astro Widgets</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
   <body class="bg-slate-100">
     <div
       class:list={[
         "py-20",
+        "px-10",
         "max-w-prose",
         "m-auto",
         "prose",
@@ -23,7 +27,7 @@ const content = compiledContent().replace(/\/public\//g, "/")
     />
     <a
       href="https://github.com/cedmax/astro-widgets"
-      class="absolute top-0 right-0"
+      class="fixed top-0 right-0"
       target="_blank"
       rel="noopener noreferrer"
       ><svg height="80" width="80"
