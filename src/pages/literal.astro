@@ -26,39 +26,46 @@ const color = fontColorContrast.default(bgColor)
 
 {
   !error && (
-    <main class="relative flex items-center py-3">
-      <a
-        class="w-full"
-        href={`https://literal.club/book/${data.slug}`}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <div class="block opacity-90 z-10 text-sm">
-          <span class="padded text-xs italic mb-2">Currently reading:</span>
-          <div class="padded line-clamp-2 p-1 pb-0 title w-full font-bold text-lg">
-            {data.title}
-          </div>
-          <div class="padded font-normal p-2 pt-0 title line-clamp-1 w-full uppercase text-xs">
-            <span class="italic text-xs lowercase">by </span>
-            {data.authors.map(({ name }) => name).join(", ")}
-          </div>
-        </div>
+    <html id="html" lang="en" class="no-mobile no-js">
+      <head>
+        <meta charset="UTF-8" />
+      </head>
+      <body>
+        <main class="relative flex items-center py-3">
+          <a
+            class="w-full"
+            href={`https://literal.club/book/${data.slug}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <div class="block opacity-90 z-10 text-sm">
+              <span class="padded text-xs italic mb-2">Currently reading:</span>
+              <div class="padded line-clamp-2 p-1 pb-0 title w-full font-bold text-lg">
+                {data.title}
+              </div>
+              <div class="padded font-normal p-2 pt-0 title line-clamp-1 w-full uppercase text-xs">
+                <span class="italic text-xs lowercase">by </span>
+                {data.authors.map(({ name }) => name).join(", ")}
+              </div>
+            </div>
 
-        <div
-          class="book bg-cover absolute rotate-3 ml-1 bottom-1/2 translate-y-1/2 left-2 leading-4"
-          style={{ backgroundImage: `url("${data.cover}")` }}
-        />
+            <div
+              class="book bg-cover absolute rotate-3 ml-1 bottom-1/2 translate-y-1/2 left-2 leading-4"
+              style={{ backgroundImage: `url("${data.cover}")` }}
+            />
 
-        <svg
-          class="absolute h-20 bottom-3 right-3 opacity-20 pointer-events-none z-0"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 31"
-        >
-          <path d="m10.8679 7.6303 4.0222.28126-2.3969 3.36904 1.8713 1.3378 2.4923-3.53078 1.9768 3.84328 2.0392-1.0644-1.8767-3.66782 3.9663.27735.1601-2.29041-4.0221-.28125 2.3988-3.39695-1.8713-1.33779-2.4625 3.50477L15.2147.861031 13.1755 1.92538l1.9027 3.69773-4.0501-.28321-.1602 2.2904ZM.688711 19.7525 11.3915 21.2567l.4521-3.2164-7.48646-1.0521L6.6329.795296 3.4165.343262.688711 19.7525ZM23.1817 27.9938 2.3285 30.9245l-.45204-3.2164 20.85324-2.9307.452 3.2164Z" />
-        </svg>
-      </a>
-    </main>
+            <svg
+              class="absolute h-20 bottom-3 right-3 opacity-20 pointer-events-none z-0"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 31"
+            >
+              <path d="m10.8679 7.6303 4.0222.28126-2.3969 3.36904 1.8713 1.3378 2.4923-3.53078 1.9768 3.84328 2.0392-1.0644-1.8767-3.66782 3.9663.27735.1601-2.29041-4.0221-.28125 2.3988-3.39695-1.8713-1.33779-2.4625 3.50477L15.2147.861031 13.1755 1.92538l1.9027 3.69773-4.0501-.28321-.1602 2.2904ZM.688711 19.7525 11.3915 21.2567l.4521-3.2164-7.48646-1.0521L6.6329.795296 3.4165.343262.688711 19.7525ZM23.1817 27.9938 2.3285 30.9245l-.45204-3.2164 20.85324-2.9307.452 3.2164Z" />
+            </svg>
+          </a>
+        </main>
+      </body>
+    </html>
   )
 }
 <Error error={error} />

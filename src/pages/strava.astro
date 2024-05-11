@@ -20,35 +20,40 @@ const bgColor = import.meta.env.PUBLIC_STRAVA_BGCOLOR || "#e95f29"
 const color = fontColorContrast.default(bgColor)
 ---
 
-<Fragment
-  >{
-    !error && (
-      <a
-        href={data.url}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="widget flex items-center gap-2 h-20 w-80 overflow-hidden relative select-none"
-        style={`background: ${bgColor}`}
-      >
-        <img class="h-20 aspect-square object-cover" src={data.image} />
-        <div class="flex flex-col">
-          <span class="text-xs">{data.copy}</span>
-          <h1 class="line-clamp-1 text-4xl">{data.title}</h1>
-        </div>
-        <div class="absolute right-0 bottom-0 z-10 opacity-35 h-5/6">
-          <svg
-            class="h-full"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-          >
-            <path d="m15.387 17.944-2.089-4.116h-3.065L15.387 24l5.15-10.172h-3.066m-7.008-5.599 2.836 5.598h4.172L10.463 0l-7 13.828h4.169" />
-          </svg>
-        </div>
-      </a>
-    )
-  }
-  <ErrorRenderer error={error} />
-</Fragment>
+{
+  !error && (
+    <html id="html" lang="en" class="no-mobile no-js">
+      <head>
+        <meta charset="UTF-8" />
+      </head>
+      <body>
+        <a
+          href={data.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="widget flex items-center gap-2 h-20 w-80 overflow-hidden relative select-none"
+          style={`background: ${bgColor}`}
+        >
+          <img class="h-20 aspect-square object-cover" src={data.image} />
+          <div class="flex flex-col">
+            <span class="text-xs">{data.copy}</span>
+            <h1 class="line-clamp-1 text-4xl">{data.title}</h1>
+          </div>
+          <div class="absolute right-0 bottom-0 z-10 opacity-35 h-5/6">
+            <svg
+              class="h-full"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+            >
+              <path d="m15.387 17.944-2.089-4.116h-3.065L15.387 24l5.15-10.172h-3.066m-7.008-5.599 2.836 5.598h4.172L10.463 0l-7 13.828h4.169" />
+            </svg>
+          </div>
+        </a>
+      </body>
+    </html>
+  )
+}
+<ErrorRenderer error={error} />
 
 <style define:vars={{ color }}>
   .widget {

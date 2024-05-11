@@ -1,0 +1,85 @@
+---
+import Letterboxd from "../api/letterboxd.js"
+import fontColorContrast from "font-color-contrast"
+import Error from "../Error.astro"
+
+let data, error
+try {
+  const letterboxd = new Letterboxd()
+  data = await letterboxd.fetch()
+} catch (e) {
+  error = e.message
+}
+
+const bgColor = import.meta.env.PUBLIC_LETTERBOXD_BGCOLOR || "#212830"
+
+const color = fontColorContrast.default(bgColor)
+const svgColor = color === "#ffffff" ? color : "#567"
+---
+
+{
+  !error && (
+    <html id="html" lang="en" class="no-mobile no-js">
+      <head>
+        <meta charset="UTF-8" />
+      </head>
+      <body>
+        <a
+          href={`https://letterboxd.com/${data.user}/film/${data.slug}/`}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <main
+            class="relative flex items-center h-64 p-1"
+            style={{ background: `${bgColor}`, color }}
+          >
+            <img class="h-full" src={data.img} alt={data.title} />
+            <div class="flex-grow h-full px-3 relative">
+              <span class="text-xs italic opacity-75">Last movie watched:</span>
+              <div class="pb-0 w-full">
+                <h1 class="text-4xl font-bold line-clamp-2 mt-1">
+                  {data.title} <span class="text-xs">({data.year})</span>
+                </h1>
+                <span class="text-xs block italic mb-2">
+                  {data.genres.join(" ")}
+                </span>
+                <h2 class="small-caps mb-2 font-semibold">{data.tagline}</h2>
+                <p class="line-clamp-4 text-sm opacity-75">
+                  {data.description}
+                </p>
+              </div>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 500 110"
+                class="absolute h-8 bottom-1 left-1 opacity-75 pointer-events-none z-0"
+              >
+                <g fill="none" fill-rule="evenodd">
+                  <g transform="translate(31 41)">
+                    <circle cx="79.2" cy="18" r="18" fill="#40BCF4" />
+                    <circle cx="48.6" cy="18" r="18" fill="#00E054" />
+                    <circle cx="18" cy="18" r="18" fill="#FF8000" />
+                    <path
+                      fill={svgColor}
+                      d="M33 28a18 18 0 0 1 0-20 18 18 0 0 1 0 20ZM64 8a18 18 0 0 1 0 20 18 18 0 0 1 0-20Z"
+                    />
+                  </g>
+                  <path
+                    fill={svgColor}
+                    d="m241 42 3-1c3 0 3-1 4-4v-4h9v9h8v9h-8v8c0 6 1 7 6 7h2v10h-6c-10 0-12-4-12-14V51h-14v8c0 6 1 7 6 7h2v10h-6c-10 0-12-4-12-14V51h-6v-9h3c2 0 3-1 4-4v-5h9v9h8Zm-91-8h11v31h17v11h-28V34Zm48 43c-11 0-17-7-17-17v-1c0-11 7-18 18-18 12 0 17 8 17 17v4h-24c0 4 3 6 7 6 3 0 4-1 5-3h11c-2 7-7 12-17 12Zm-6-22h13c0-4-2-6-6-6s-6 2-7 6Zm92 22c-11 0-17-7-17-17v-1c0-11 7-18 18-18s17 8 17 17v4h-24c0 4 3 6 7 6 3 0 4-1 5-3h11c-2 7-7 12-17 12Zm-6-22h13c0-4-2-6-6-6s-7 2-7 6Zm28 21V42h8l2 7c1-5 4-8 10-8h2v12h-4c-6 0-7 2-7 8v15h-11Zm36-6-1 6h-9V31h11v16c1-4 5-6 9-6 8 0 13 5 13 17v1c0 12-5 18-13 18-5 0-8-3-10-7Zm13-11v-1c0-5-3-8-6-8-4 0-7 3-7 8v1c0 6 3 8 7 8s6-2 6-8Zm14 1v-1c0-12 7-18 17-18s17 6 17 18v1c0 11-7 17-17 17-11 0-17-6-17-17Zm23 0v-1c0-6-2-9-6-9s-7 3-7 9v1c0 5 3 8 7 8s6-3 6-8Zm28 6-7 10h-12l12-18-11-16h12l6 8 5-8h12l-11 16 12 18h-12l-6-10Zm40 4c-2 4-5 6-10 6-9 0-14-5-14-17v-1c0-12 6-17 14-17 4 0 8 2 9 6V31h11v45h-9l-1-6Zm-1-11v-1c0-5-2-8-6-8s-6 3-6 8v1c0 6 2 8 6 8s6-2 6-8Z"
+                  />
+                </g>
+              </svg>
+            </div>
+          </main>
+        </a>
+      </body>
+    </html>
+  )
+}
+<Error error={error} />
+
+<style>
+  .small-caps {
+    font-variant: small-caps;
+  }
+</style>
