@@ -12,6 +12,7 @@ try {
 }
 
 const bgColor = import.meta.env.PUBLIC_LETTERBOXD_BGCOLOR || "#212830"
+const size = import.meta.env.PUBLIC_LETTERBOXD_SIZE || "large"
 
 const color = fontColorContrast.default(bgColor)
 const svgColor = color === "#ffffff" ? color : "#567"
@@ -30,23 +31,36 @@ const svgColor = color === "#ffffff" ? color : "#567"
           rel="noopener noreferrer"
         >
           <main
-            class="relative flex items-center h-64 p-1"
+            class:list={[
+              "relative",
+              "flex",
+              "items-center",
+              "p-1",
+              {
+                "h-40": size !== "large",
+                "h-60": size === "large",
+              },
+            ]}
             style={{ background: `${bgColor}`, color }}
           >
             <img class="h-full" src={data.img} alt={data.title} />
             <div class="flex-grow h-full px-3 relative">
               <span class="text-xs italic opacity-75">Last movie watched:</span>
               <div class="pb-0 w-full">
-                <h1 class="text-4xl font-bold line-clamp-2 mt-1">
+                <h1 class="text-4xl font-bold line-clamp-1 mt-1">
                   {data.title} <span class="text-xs">({data.year})</span>
                 </h1>
-                <span class="text-xs block italic mb-2">
+                <div class="text-xs line-clamp-1 italic mb-2">
                   {data.genres.join(" ")}
-                </span>
-                <h2 class="small-caps mb-2 font-semibold">{data.tagline}</h2>
-                <p class="line-clamp-4 text-sm opacity-75">
-                  {data.description}
-                </p>
+                </div>
+                <h2 class="small-caps mb-2 font-semibold line-clamp-1">
+                  {data.tagline}
+                </h2>
+                {size === "large" && (
+                  <p class="line-clamp-4 text-sm opacity-75">
+                    {data.description}
+                  </p>
+                )}
               </div>
               <svg
                 xmlns="http://www.w3.org/2000/svg"

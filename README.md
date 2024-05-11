@@ -109,6 +109,28 @@ Style inspired by [@aepicos](https://github.com/aepicos)'s [work](https://codepe
 | `PUBLIC_LITERALCLUB_SIZE`    | `small`               | Options available `small`, `medium`, `large`. Iframe heights, respectively: 128px, 164px and 200px |
 | `PUBLIC_LITERALCLUB_BGCOLOR` | `#e8e3d5`             | Any color in any css digestible format, the text color will change according to contrast needs |
 
+### [Letterboxd.com](https://letterboxd.com)
+
+A widget to show the latest film watched (it works only if your diary is public).
+
+```
+<iframe 
+  src="{YOUR_NETLIFY_DOMAIN}/letterboxd" 
+  style="width:100%;max-width:152px;border:0;height:{CHECK_THE_TABLE_BELOW};outline:0" 
+  frameborder="0"
+  scrolling="no"
+/>
+```
+
+[<img src="/public/letterboxd-example.png" alt="letterboxd widget example" width="480" />](https://astro-widgets.netlify.app/letterboxd/)
+
+#### Configuration
+
+| Environment Variable         | Default               | Description |
+| ---------------------------- | --------------------- | ----------- |
+| `LETTERBOXD_USER`            | _(mandatory)_         |  |
+| `PUBLIC_LITERALCLUB_SIZE`    | `large`               | Options available `small`, `large`. Iframe heights, respectively: 160px, 256px  |
+| `PUBLIC_LETTERBOXD_BGCOLOR`  | `#212830`             | Any color in any css digestible format, the text color will change according to contrast needs |
 
 ## Scheduling
 
