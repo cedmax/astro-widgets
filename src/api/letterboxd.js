@@ -1,22 +1,12 @@
 import axios from "axios"
+import feed2json from "feed2json"
 import cheerio from "cheerio"
-import { find, get } from "lodash-es"
 
 const env = import.meta.env
 
 export default class Letterboxd {
-  #getImgUrl = async (slug) => {
-    const { data } = await axios.get(
-      `https://letterboxd.com/ajax/poster/film/${slug}/std/230x345/`,
-    )
-    const $ = cheerio.load(data)
-    return $("img").attr("src")
-  }
-
-  #getMeta = async (slug) => {
-    const { data } = await axios.get(
-      `https://letterboxd.com/film/${slug}/genres/`,
-    )
+  #getMeta = async (url) => {
+    const { data } = await axios.get(url)
     const $ = cheerio.load(data)
 
     return {
@@ -29,22 +19,29 @@ export default class Letterboxd {
     }
   }
 
-  #dataMapping = async (data) => {
-    const $ = cheerio.load(data)
-    const diary = $($("#diary-table .diary-entry-row").get(0))
-    const slug = $(diary.find("[data-film-slug]").get(0)).attr("data-film-slug")
+  #dataMapping = async (rssString) => {
+    const {
+      items: [item],
+    } = await new Promise((resolve, reject) => {
+      feed2json.fromString(rssString, "", (err, data) => {
+        if (err !== null) reject(err)
+        else resolve(data)
+      })
+    })
 
-    const [img, { genres, description, tagline }] = await Promise.all([
-      this.#getImgUrl(slug),
-      this.#getMeta(slug),
-    ])
+    const { title: composedTitle, url, content_html: html } = item
+    const [year, ...titleArr] = composedTitle.split(", ").reverse()
+    const title = titleArr.reverse().join(", ")
 
-    const title = diary.find(".td-film-details").text()
-    const year = diary.find(".td-released").text()
+    const { tagline, description, genres } = await this.#getMeta(
+      url.replace(`/${this.user}/`, "/"),
+    )
+
+    const $ = cheerio.load(html)
+    const img = $("img").attr("src")
 
     return {
       title,
-      slug,
       year,
       genres,
       tagline,
@@ -54,16 +51,7 @@ export default class Letterboxd {
   }
 
   #getUrl() {
-    return `https://letterboxd.com/${this.user}/films/diary/`
-  }
-
-  async #getTrackImage(artist, track) {
-    const { data } = await axios.get(
-      `https://ws.audioscrobbler.com/2.0/?api_key=${this.apiKey}&method=track.getInfo&artist=${artist}&track=${track}&format=json`,
-    )
-    return find(get(data, "track.album.image"), ({ size }) => size === "large")[
-      "#text"
-    ]
+    return `https://letterboxd.com/${this.user}/rss/`
   }
 
   constructor() {

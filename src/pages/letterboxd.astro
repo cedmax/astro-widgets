@@ -25,11 +25,7 @@ const svgColor = color === "#ffffff" ? color : "#567"
         <meta charset="UTF-8" />
       </head>
       <body>
-        <a
-          href={`https://letterboxd.com/${data.user}/film/${data.slug}/`}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <a href={data.url} target="_blank" rel="noopener noreferrer">
           <main
             class:list={[
               "relative",
@@ -48,7 +44,7 @@ const svgColor = color === "#ffffff" ? color : "#567"
               <span class="text-xs italic opacity-75">Last movie watched:</span>
               <div class="pb-0 w-full">
                 <h1 class="text-4xl font-bold line-clamp-1 mt-1">
-                  {data.title} <span class="text-xs">({data.year})</span>
+                  {data.title} <span class="text-xs ml-1.5">({data.year})</span>
                 </h1>
                 <div class="text-xs line-clamp-1 italic mb-2">
                   {data.genres.join(" ")}
