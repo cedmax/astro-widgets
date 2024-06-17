@@ -6,7 +6,9 @@ const env = import.meta.env
 
 export default class Letterboxd {
   #getMeta = async (url) => {
+    console.log("1")
     const { data } = await axios.get(url)
+    console.log("2")
     const $ = cheerio.load(data)
 
     return {
@@ -33,8 +35,10 @@ export default class Letterboxd {
     const [year, ...titleArr] = composedTitle.split(", ").reverse()
     const title = titleArr.reverse().join(", ")
 
+    const filmPath = url.match(/film\/([^\/])+/)[0]
+
     const { tagline, description, genres } = await this.#getMeta(
-      url.replace(`/${this.user}/`, "/"),
+      `https://letterboxd.com/${filmPath}`,
     )
 
     const $ = cheerio.load(html)
@@ -47,6 +51,7 @@ export default class Letterboxd {
       tagline,
       description,
       img,
+      url,
     }
   }
 
