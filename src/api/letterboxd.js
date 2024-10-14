@@ -6,9 +6,7 @@ const env = import.meta.env
 
 export default class Letterboxd {
   #getMeta = async (url) => {
-    console.log("1")
     const { data } = await axios.get(url)
-    console.log("2")
     const $ = cheerio.load(data)
 
     return {
